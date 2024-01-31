@@ -1,20 +1,14 @@
-describe('stdin test', () => {
-  beforeEach(() => {
-    process.stdout.write('Welcome to Holberton School, what is your name?\n');
-    process.stdin.setEncoding('utf8');
-  });
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-  test('reads from stdin', (done) => {
-    process.stdin.on('readable', () => {
-      const name = process.stdin.read();
-      if (name !== null) {
-        process.stdout.write(`Your name is: ${name}`);
-        done();
-      }
-    });
-  });
+process.stdin.setEncoding('utf8');
 
-  afterEach(() => {
-    process.stdout.write('This important software is now closing\n');
-  });
+process.stdin.on('readable', () => {
+  const name = process.stdin.read();
+  if (name !== null) {
+    process.stdout.write(`Your name is: ${name}`);
+  }
+});
+
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });
